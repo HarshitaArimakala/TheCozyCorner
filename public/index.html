@@ -15,7 +15,7 @@
 </head>
 <body>
 
-  <!-- NAVBAR: brand, links, phone menu button and cart button -->
+  <!-- NAVBAR -->
   <header class="nav" id="top">
     <a class="brand" href="#top">The Cozy Corner</a>
     <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
@@ -42,7 +42,6 @@
           </div>
         </div>
 
-        <!-- PHOTO SLOT: put your real café photo at public/images/cafe.jpg -->
         <figure class="photo-frame">
           <div class="photo-placeholder" aria-hidden="true">
             <svg viewBox="0 0 64 64" width="64" height="64"><path d="M14 28h32v10a14 14 0 0 1-14 14h-4a14 14 0 0 1-14-14z" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/><path d="M46 31h4a6 6 0 0 1 0 12h-5" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></svg>
@@ -54,7 +53,7 @@
       </div>
     </section>
 
-    <!-- MENU: app.js fills #menuTabs and #menuGrid from /api/menu -->
+    <!-- MENU -->
     <section class="band band-paper" id="menu">
       <div class="wrap">
         <div class="section-head">
@@ -66,7 +65,7 @@
         <!-- today's special banner -->
         <div class="special">
           <span class="special-tag">Today's special</span>
-          <p>A Hearth Latte with a warm slice of banana loaf. Ask at the counter.</p>
+          <p>A Latte with a warm slice of banana loaf. Ask at the counter.</p>
         </div>
 
         <div class="tabs" id="menuTabs" role="tablist"></div>
@@ -93,7 +92,7 @@
       </div>
     </section>
 
-    <!-- RESERVE: handled by app.js, posts to /api/reservations -->
+    <!-- RESERVE-->
     <section class="band band-pink" id="reserve">
       <div class="wrap">
         <div class="section-head">
@@ -120,7 +119,7 @@
       </div>
     </section>
 
-    <!-- VISIT + CONTACT: contact form posts to /api/contact -->
+    <!-- VISIT -->
     <section class="band band-sky" id="visit">
       <div class="wrap">
         <div class="section-head">
