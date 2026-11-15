@@ -3,11 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Hearth &amp; Bean — Neighbourhood Café</title>
-  <meta name="description" content="Hearth & Bean is a cozy neighbourhood café serving slow-brewed coffee, fresh bakes and warm bites.">
+  <title>Hearth &amp; Bean — Café at IIT Bhilai</title>
+  <meta name="description" content="Hearth & Bean is the café next to Indravati hostel, IIT Bhilai. Coffee, chai, momos and more. Order for pickup or reserve a table.">
+  <meta name="theme-color" content="#ffd84d">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,700;1,9..144,500&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Caprasimo&family=Caveat:wght@600;700&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -28,109 +30,138 @@
   <main>
     <!-- HERO -->
     <section class="hero">
-      <div class="hero-inner">
-        <p class="eyebrow">Open daily · 8 AM – 10 PM</p>
-        <h1>Slow mornings,<br><em>warm cups.</em></h1>
-        <p class="lead">A little corner café where the coffee is brewed with patience, the bakes come out of the oven at dawn, and nobody rushes you.</p>
-        <div class="hero-cta">
-          <a class="btn" href="#menu">See the menu</a>
-          <a class="btn btn-ghost" href="#reserve">Reserve a table</a>
+      <div class="wrap hero-grid">
+        <div class="hero-text">
+          <p class="eyebrow">Mon–Fri 8 AM – 10 PM · Sat–Sun till 11 PM</p>
+          <h1>Chai, coffee &amp; <span class="squiggle">late-night</span> cravings.</h1>
+          <p class="lead">Your hangout next to Indravati hostel. Grab a coffee between lectures, momos at 10 PM, or a table for the whole group project.</p>
+          <div class="hero-cta">
+            <a class="btn" href="#menu">See the menu</a>
+            <a class="btn btn-ghost" href="#reserve">Reserve a table</a>
+          </div>
         </div>
+
+        <!-- PHOTO SLOT: put your real café photo at public/images/cafe.jpg -->
+        <figure class="photo-frame">
+          <div class="photo-placeholder" aria-hidden="true">
+            <svg viewBox="0 0 64 64" width="64" height="64"><path d="M14 28h32v10a14 14 0 0 1-14 14h-4a14 14 0 0 1-14-14z" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/><path d="M46 31h4a6 6 0 0 1 0 12h-5" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></svg>
+            <span>Your café photo goes here<br><small>public/images/cafe.jpg</small></span>
+          </div>
+          <img src="images/cafe.jpg" alt="Inside Hearth &amp; Bean" onerror="this.remove()">
+          <span class="sticker">Open till<br><strong>11 PM</strong><br>on weekends</span>
+        </figure>
       </div>
     </section>
 
     <!-- MENU: app.js fills #menuTabs and #menuGrid from /api/menu -->
-    <section class="section" id="menu">
-      <div class="section-head">
-        <p class="eyebrow">What we serve</p>
-        <h2>The Menu</h2>
-        <p class="sub">Add anything to your order and we'll have it ready for pickup.</p>
-      </div>
+    <section class="band band-paper" id="menu">
+      <div class="wrap">
+        <div class="section-head">
+          <p class="eyebrow">What we serve</p>
+          <h2>The Menu</h2>
+          <p class="sub">Add what you want, place the order, and collect it at the counter.</p>
+        </div>
 
-      <!-- MY OWN ADDITION: today's special banner -->
-      <div class="special">
-        <span class="special-tag">Today's special</span>
-        <p>A Hearth Latte with a warm slice of banana loaf. Ask at the counter.</p>
-      </div>
+        <!-- today's special banner -->
+        <div class="special">
+          <span class="special-tag">Today's special</span>
+          <p>A Hearth Latte with a warm slice of banana loaf. Ask at the counter.</p>
+        </div>
 
-      <div class="tabs" id="menuTabs" role="tablist"></div>
-      <div class="menu-grid" id="menuGrid">
-        <p class="muted">Loading the menu…</p>
+        <div class="tabs" id="menuTabs" role="tablist"></div>
+        <div class="menu-grid" id="menuGrid">
+          <p class="muted">Loading the menu…</p>
+        </div>
       </div>
     </section>
 
     <!-- STORY -->
-    <section class="section story" id="story">
-      <div class="story-text">
-        <p class="eyebrow">Our story</p>
-        <h2>Started with a single grinder and a stubborn idea.</h2>
-        <p>Hearth &amp; Bean began as a weekend experiment: what if a café felt less like a stop on the way somewhere and more like the living room you wish you had? We roast in small batches, bake before sunrise, and keep the music low enough for conversation.</p>
-        <p>Bring a book, a laptop, or a friend you haven't seen in a while. The corner table by the window is the best seat in the house — but it's first come, first served.</p>
+    <section class="band band-mint" id="story">
+      <div class="wrap story">
+        <div class="story-text">
+          <p class="eyebrow">Our story</p>
+          <h2>Made for the in-between hours.</h2>
+          <p>Hearth &amp; Bean is for the gap between lectures, the night before a deadline, and every "let's just grab something" plan. Come alone with a laptop, or show up with your whole hostel floor.</p>
+          <p class="hand">Bring friends. We have the tables.</p>
+        </div>
         <ul class="values">
-          <li><strong>Small-batch beans</strong> sourced from estates we've actually visited.</li>
-          <li><strong>Baked daily</strong> — when it's gone, it's gone.</li>
-          <li><strong>No rush</strong> — stay as long as your cup (or your story) lasts.</li>
+          <li><strong>Right on campus</strong><span>Next to Indravati hostel, a short walk from anywhere.</span></li>
+          <li><strong>Order ahead</strong><span>Place a pickup order here and just collect it.</span></li>
+          <li><strong>Open late</strong><span>Till 10 PM on weekdays and 11 PM on weekends.</span></li>
         </ul>
       </div>
     </section>
 
     <!-- RESERVE: handled by app.js, posts to /api/reservations -->
-    <section class="section reserve" id="reserve">
-      <div class="section-head">
-        <p class="eyebrow">Save your seat</p>
-        <h2>Reserve a Table</h2>
-        <p class="sub">Tell us when you're coming and we'll keep a spot warm.</p>
+    <section class="band band-pink" id="reserve">
+      <div class="wrap">
+        <div class="section-head">
+          <p class="eyebrow">Save your seat</p>
+          <h2>Reserve a Table</h2>
+          <p class="sub">Coming with a big group? Book ahead so nobody stands around.</p>
+        </div>
+        <form class="form-card" id="reserveForm" novalidate>
+          <div class="row">
+            <label>Name<input name="name" required maxlength="80" autocomplete="name"></label>
+            <label>Phone<input name="phone" type="tel" required maxlength="20" autocomplete="tel"></label>
+          </div>
+          <div class="row three">
+            <label>Date<input name="date" type="date" required></label>
+            <label>Time<input name="time" type="time" min="08:00" max="21:30" step="900" required></label>
+            <label>Guests<input name="guests" type="number" min="1" max="12" value="2" required></label>
+          </div>
+          <label>Anything we should know? <small>(optional)</small>
+            <textarea name="notes" rows="3" maxlength="300" placeholder="Birthday, group project, window seat…"></textarea>
+          </label>
+          <button class="btn" type="submit">Request reservation</button>
+          <p class="form-msg" id="reserveMsg" role="status"></p>
+        </form>
       </div>
-      <form class="form-card" id="reserveForm" novalidate>
-        <div class="row">
-          <label>Name<input name="name" required maxlength="80" autocomplete="name"></label>
-          <label>Phone<input name="phone" type="tel" required maxlength="20" autocomplete="tel"></label>
-        </div>
-        <div class="row three">
-          <label>Date<input name="date" type="date" required></label>
-          <label>Time<input name="time" type="time" min="08:00" max="21:30" step="900" required></label>
-          <label>Guests<input name="guests" type="number" min="1" max="12" value="2" required></label>
-        </div>
-        <label>Anything we should know? <small>(optional)</small>
-          <textarea name="notes" rows="3" maxlength="300" placeholder="Birthday, high chair, window seat…"></textarea>
-        </label>
-        <button class="btn" type="submit">Request reservation</button>
-        <p class="form-msg" id="reserveMsg" role="status"></p>
-      </form>
     </section>
 
     <!-- VISIT + CONTACT: contact form posts to /api/contact -->
-    <section class="section visit" id="visit">
-      <div class="section-head">
-        <p class="eyebrow">Come say hi</p>
-        <h2>Visit &amp; Contact</h2>
-      </div>
-      <div class="visit-grid">
-        <div class="info-card">
-          <h3>Find us</h3>
-          <p>14, Banyan Lane<br>Near the old clock tower<br>Your City, 491001</p>
-          <h3>Hours</h3>
-          <table class="hours">
-            <tr><td>Mon – Fri</td><td>8:00 AM – 10:00 PM</td></tr>
-            <tr><td>Sat – Sun</td><td>8:00 AM – 11:00 PM</td></tr>
-          </table>
-          <h3>Say hello</h3>
-          <p>hello@hearthandbean.example<br>+91 98765 43210</p>
+    <section class="band band-sky" id="visit">
+      <div class="wrap">
+        <div class="section-head">
+          <p class="eyebrow">Come say hi!</p>
+          <h2>Visit &amp; Contact</h2>
         </div>
-        <form class="form-card" id="contactForm" novalidate>
-          <h3>Send us a note</h3>
-          <label>Name<input name="name" required maxlength="80"></label>
-          <label>Email<input name="email" type="email" required maxlength="120"></label>
-          <label>Message<textarea name="message" rows="4" required maxlength="1000"></textarea></label>
-          <button class="btn" type="submit">Send message</button>
-          <p class="form-msg" id="contactMsg" role="status"></p>
-        </form>
+        <div class="visit-grid">
+          <div class="info-card">
+            <h3>Find us</h3>
+            <p>Near Indravati hostel<br>IIT Bhilai<br>Chhattisgarh, 491002</p>
+            <a class="btn btn-small" href="https://www.google.com/maps/place/Indian+Institute+of+Technology+Bhilai/@21.247098,81.3188034,21z" target="_blank" rel="noopener">Open in Google Maps ↗</a>
+            <div class="map-wrap">
+              <iframe title="Map showing Hearth &amp; Bean at IIT Bhilai"
+                src="https://maps.google.com/maps?q=21.2470689,81.318887&amp;z=17&amp;output=embed"
+                loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+            </div>
+
+            <h3>Hours</h3>
+            <table class="hours">
+              <tr><td>Mon – Fri</td><td>8:00 AM – 10:00 PM</td></tr>
+              <tr><td>Sat – Sun</td><td>8:00 AM – 11:00 PM</td></tr>
+            </table>
+
+            <h3>Say hello!</h3>
+            <p><a href="mailto:hearthandbean@gmail.com">hearthandbean@gmail.com</a><br><a href="tel:+911234567890">+91 12345 67890</a></p>
+          </div>
+
+          <form class="form-card" id="contactForm" novalidate>
+            <h3>Send us a note</h3>
+            <label>Name<input name="name" required maxlength="80"></label>
+            <label>Email<input name="email" type="email" required maxlength="120"></label>
+            <label>Message<textarea name="message" rows="4" required maxlength="1000"></textarea></label>
+            <button class="btn" type="submit">Send message</button>
+            <p class="form-msg" id="contactMsg" role="status"></p>
+          </form>
+        </div>
       </div>
     </section>
   </main>
 
   <footer class="footer">
-    <p>© <span id="year"></span> Hearth &amp; Bean. Brewed with care.</p>
+    <p>© <span id="year"></span> Hearth &amp; Bean · IIT Bhilai. Come hungry.</p>
   </footer>
 
   <!-- CART DRAWER: slides in from the right; app.js fills #cartItems -->
@@ -150,6 +181,8 @@
       <p class="form-msg" id="orderMsg" role="status"></p>
     </form>
   </aside>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
   <script src="app.js"></script>
 </body>
