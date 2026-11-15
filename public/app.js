@@ -1,11 +1,11 @@
 (() => {
   'use strict';
 
-  // ---------- small helpers ----------
+
   const $ = (sel) => document.querySelector(sel);
   const rupee = (n) => '₹' + n.toLocaleString('en-IN');
 
-  // esc(): turns user/server text into safe text, so injected HTML cannot run.
+
   function esc(s) {
     return String(s)
       .replace(/&/g, '&amp;')
@@ -15,17 +15,17 @@
       .replace(/'/g, '&#39;');
   }
 
-  // titleCase(): "masala chai" -> "Masala Chai", so every menu name looks the same.
+
   function titleCase(s) {
     return String(s).trim().replace(/(^|\s)(\p{L})/gu, (m, space, ch) => space + ch.toUpperCase());
   }
-  // sentenceCase(): makes the first letter of a description a capital.
+
   function sentenceCase(s) {
     const t = String(s || '').trim();
     return t.charAt(0).toUpperCase() + t.slice(1);
   }
 
-  // postJSON(): sends JSON to the server, throws an Error with the server's message on failure.
+
   async function postJSON(url, body) {
     const res = await fetch(url, {
       method: 'POST',
@@ -42,20 +42,11 @@
     el.className = 'form-msg ' + (ok ? 'ok' : 'err');
   }
 
-  // formData(): reads a form into a plain object using each input's name attribute.
+
   function formData(form) {
     return Object.fromEntries(new FormData(form).entries());
   }
 
-  // toast(): small pop-up at the bottom of the screen.
-  let toastTimer;
-  function toast(text) {
-    const el = $('#toast');
-    el.textContent = text;
-    el.classList.add('show');
-    clearTimeout(toastTimer);
-    toastTimer = setTimeout(() => el.classList.remove('show'), 1600);
-  }
 
   // ---------- state ----------
   let menu = [];
@@ -136,8 +127,6 @@
     if (!btn) return;
     const id = Number(btn.dataset.id);
     addToCart(id);
-    const item = menu.find((m) => m.id === id);
-    if (item) toast(`${titleCase(item.name)} added to your order`);
     btn.textContent = '✓ Added';
     setTimeout(() => { btn.textContent = '+ Add to order'; }, 900);
   });
@@ -254,7 +243,7 @@
     const btn = reserveForm.querySelector('button[type="submit"]');
     btn.disabled = true;
     try {
-      const data = await postJSON('/api/reservations', formData(reserveForm));
+      await postJSON('/api/reservations', formData(reserveForm));
       setMsg(msg, 'Thanks! Your table request is in. We\'ll confirm by phone soon.', true);
       reserveForm.reset();
       reserveForm.elements.guests.value = 2;
