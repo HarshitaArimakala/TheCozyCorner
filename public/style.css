@@ -71,7 +71,7 @@ a { color: inherit; }
   background: var(--paper);
   border-bottom: 1px solid var(--line);
 }
-.brand { font-family: var(--display); font-size: 1.5rem; text-decoration: none; }
+.brand { font-family: "Pacifico", cursive; font-weight: 400; font-size: 1.6rem; text-decoration: none; }
 .brand span { color: var(--caramel); }
 #navLinks { display: flex; gap: 6px; margin-left: auto; }
 #navLinks a {
