@@ -15,6 +15,16 @@
       .replace(/'/g, '&#39;');
   }
 
+  // titleCase(): "masala chai" -> "Masala Chai", so every menu name looks the same.
+  function titleCase(s) {
+    return String(s).trim().replace(/(^|\s)(\p{L})/gu, (m, space, ch) => space + ch.toUpperCase());
+  }
+  // sentenceCase(): makes the first letter of a description a capital.
+  function sentenceCase(s) {
+    const t = String(s || '').trim();
+    return t.charAt(0).toUpperCase() + t.slice(1);
+  }
+
   // postJSON(): sends JSON to the server, throws an Error with the server's message on failure.
   async function postJSON(url, body) {
     const res = await fetch(url, {
@@ -35,6 +45,16 @@
   // formData(): reads a form into a plain object using each input's name attribute.
   function formData(form) {
     return Object.fromEntries(new FormData(form).entries());
+  }
+
+  // toast(): small pop-up at the bottom of the screen.
+  let toastTimer;
+  function toast(text) {
+    const el = $('#toast');
+    el.textContent = text;
+    el.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => el.classList.remove('show'), 1600);
   }
 
   // ---------- state ----------
@@ -95,8 +115,8 @@
     $('#menuGrid').innerHTML = items.length
       ? items.map((m) => `
         <article class="card">
-          <div class="card-top"><h3>${esc(m.name)}</h3><span class="price">${rupee(m.price)}</span></div>
-          <p>${esc(m.description)}</p>
+          <div class="card-top"><h3>${esc(titleCase(m.name))}</h3><span class="price">${rupee(m.price)}</span></div>
+          <p>${esc(sentenceCase(m.description))}</p>
           <button class="add" data-id="${m.id}">+ Add to order</button>
         </article>`).join('')
       : '<p class="muted">Nothing here yet.</p>';
@@ -114,7 +134,10 @@
   $('#menuGrid').addEventListener('click', (e) => {
     const btn = e.target.closest('.add');
     if (!btn) return;
-    addToCart(Number(btn.dataset.id));
+    const id = Number(btn.dataset.id);
+    addToCart(id);
+    const item = menu.find((m) => m.id === id);
+    if (item) toast(`${titleCase(item.name)} added to your order`);
     btn.textContent = '✓ Added';
     setTimeout(() => { btn.textContent = '+ Add to order'; }, 900);
   });
@@ -147,6 +170,11 @@
     else cart.push({ id, qty: 1 });
     saveCart();
     renderCart();
+    // Little bounce on the cart counter so people notice something happened.
+    const counter = $('#cartCount');
+    counter.classList.remove('bump');
+    void counter.offsetWidth;
+    counter.classList.add('bump');
   }
 
   function changeQty(id, delta) {
@@ -164,16 +192,17 @@
     const rows = cart.map((l) => {
       const item = menu.find((m) => m.id === l.id);
       if (!item) return '';
+      const name = titleCase(item.name);
       total += item.price * l.qty;
       count += l.qty;
       return `
         <div class="line">
-          <span class="name">${esc(item.name)}</span>
+          <span class="name">${esc(name)}</span>
           <span>${rupee(item.price * l.qty)}</span>
           <div class="qty">
-            <button data-id="${l.id}" data-d="-1" aria-label="Remove one ${esc(item.name)}">−</button>
+            <button data-id="${l.id}" data-d="-1" aria-label="Remove one ${esc(name)}">−</button>
             <span>${l.qty}</span>
-            <button data-id="${l.id}" data-d="1" aria-label="Add one ${esc(item.name)}">+</button>
+            <button data-id="${l.id}" data-d="1" aria-label="Add one ${esc(name)}">+</button>
             <span class="sub-price">${rupee(item.price)} each</span>
           </div>
         </div>`;
@@ -226,7 +255,7 @@
     btn.disabled = true;
     try {
       const data = await postJSON('/api/reservations', formData(reserveForm));
-      setMsg(msg, `Request received (ref #${data.id}). We'll confirm by phone soon.`, true);
+      setMsg(msg, 'Thanks! Your table request is in. We\'ll confirm by phone soon.', true);
       reserveForm.reset();
       reserveForm.elements.guests.value = 2;
     } catch (err) {
