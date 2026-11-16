@@ -64,9 +64,18 @@ async function init() {
       name text not null,
       email text not null,
       message text not null,
-      created_at timestamptz default now()
+           created_at timestamptz default now()
+    );
+    create table if not exists settings (
+      key text primary key,
+      value text not null default ''
     );
   `);
+
+  await pool.query(
+    `insert into settings (key, value) values ('special', $1) on conflict (key) do nothing`,
+    ['A warm latte with a slice of banana loaf. Ask at the counter.']
+  );
 
   // seed only when the menu is empty
   const r = await pool.query('select count(*)::int as n from menu_items');
@@ -104,11 +113,12 @@ async function updateMenuItem(id, f) {
   const r = await pool.query(
     `update menu_items set
        name = coalesce($1, name),
-       description = coalesce($2, description),
-       price = coalesce($3, price),
-       available = coalesce($4, available)
-     where id = $5 returning ${COLS}`,
-    [f.name ?? null, f.description ?? null, f.price ?? null, f.available ?? null, id]
+       category = coalesce($2, category),
+       description = coalesce($3, description),
+       price = coalesce($4, price),
+       available = coalesce($5, available)
+     where id = $6 returning ${COLS}`,
+    [f.name ?? null, f.category ?? null, f.description ?? null, f.price ?? null, f.available ?? null, id]
   );
   return r.rows[0] || null;
 }
@@ -221,10 +231,24 @@ async function listMessages() {
   );
   return r.rows;
 }
+async function getSpecial() {
+  const r = await pool.query(`select value from settings where key = 'special'`);
+  return r.rows[0] ? r.rows[0].value : '';
+}
+
+async function setSpecial(text) {
+  await pool.query(
+    `insert into settings (key, value) values ('special', $1)
+     on conflict (key) do update set value = excluded.value`,
+    [text]
+  );
+}
+
 module.exports = {
-  pool, init,
+  init,
   getMenu, getAllMenu, addMenuItem, updateMenuItem, deleteMenuItem,
   createOrder, listOrders, updateOrderStatus,
   createReservation, countGuests, listReservations, updateReservationStatus,
   createMessage, listMessages,
+  getSpecial, setSpecial,
 };

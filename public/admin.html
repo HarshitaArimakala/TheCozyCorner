@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>Admin · The Cozy Corner</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caprasimo&family=DM+Sans:wght@400;500;700&family=Pacifico&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+
+  <section class="login" id="login">
+    <form class="form-card" id="loginForm">
+      <h2>Staff login</h2>
+      <label>Password
+        <input type="password" id="tokenInput" required autocomplete="current-password">
+      </label>
+      <button class="btn" type="submit">Log in</button>
+      <p class="form-msg" id="loginMsg" role="status"></p>
+    </form>
+  </section>
+
+  <div id="panel" hidden>
+    <header class="nav">
+      <span class="brand">The Cozy Corner · Admin</span>
+      <button class="btn btn-ghost btn-small" id="logout" type="button">Log out</button>
+    </header>
+
+    <main class="wrap admin">
+      <div class="tabs" id="adminTabs">
+        <button class="tab active" data-view="orders">Orders <span class="count" id="newCount"></span></button>
+        <button class="tab" data-view="reservations">Reservations</button>
+        <button class="tab" data-view="messages">Messages</button>
+        <button class="tab" data-view="menu">Menu</button>
+        <button class="tab" data-view="special">Today's special</button>
+      </div>
+      <div id="view"></div>
+    </main>
+  </div>
+
+  <script src="admin.js"></script>
+</body>
+</html>

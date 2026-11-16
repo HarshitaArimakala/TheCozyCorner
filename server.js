@@ -36,7 +36,14 @@ app.get("/api/menu", async (req, res) => {
     res.status(500).json({ error: "Could not load the menu" });
   }
 });
-
+app.get("/api/special", async (req, res) => {
+  try {
+    res.json({ text: await db.getSpecial() });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Server error" });
+  }
+});
 // ---------- orders route -----------
 app.post("/api/orders", async (req, res) => {
   try {
@@ -117,6 +124,8 @@ app.patch("/api/admin/menu/:id", requireAdmin, async (req, res) => {
   try {
     const fields = {};
     if (req.body.name !== undefined) fields.name = clean(req.body.name, 80);
+        if (req.body.category !== undefined)
+      fields.category = clean(req.body.category, 40);
     if (req.body.description !== undefined)
       fields.description = clean(req.body.description, 200);
     if (req.body.price !== undefined) {
@@ -152,7 +161,17 @@ app.delete("/api/admin/menu/:id", requireAdmin, async (req, res) => {
     res.status(500).json({ error: "Server error" });
   }
 });
-
+// change today's special
+app.put("/api/admin/special", requireAdmin, async (req, res) => {
+  try {
+    const text = clean(req.body.text, 200);
+    await db.setSpecial(text);
+    res.json({ ok: true, text });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Server error" });
+  }
+});
 // change an order's status
 const ORDER_STATUSES = ["new", "preparing", "ready", "completed", "cancelled"];
 app.patch("/api/admin/orders/:id", requireAdmin, async (req, res) => {
@@ -264,7 +283,7 @@ app.post("/api/contact", async (req, res) => {
 db.init()
   .then(() => {
     app.listen(PORT, () => {
-      console.log(`Hearth & Bean running at http://localhost:${PORT}`);
+      console.log(`The Cozy Corner running at http://localhost:${PORT}`);
     });
   })
   .catch((err) => {
