@@ -272,7 +272,18 @@
     }
   });
 
+    // ---------- today's special ----------
+  async function loadSpecial() {
+    try {
+      const res = await fetch('/api/special');
+      const { text } = await res.json();
+      $('#specialText').textContent = text;
+      $('#special').style.display = text ? '' : 'none';
+    } catch (e) { /* banner stays hidden */ }
+  }
+
   // ---------- start ----------
   renderCart();
   loadMenu();
+  loadSpecial();
 })();
