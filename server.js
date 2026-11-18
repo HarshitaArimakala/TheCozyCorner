@@ -225,10 +225,10 @@ app.post("/api/reservations", async (req, res) => {
       return res.status(400).json({ error: "Pick a valid date." });
     if (!/^\d{2}:\d{2}$/.test(time))
       return res.status(400).json({ error: "Pick a valid time." });
-    if (!(guests >= 1 && guests <= 12))
+    if (!(guests >= 1 && guests <= 8))
       return res
         .status(400)
-        .json({ error: "Guests must be between 1 and 12." });
+        .json({ error: "Guests must be between 1 and 8." });
 
     const today = new Date().toISOString().slice(0, 10);
     if (date < today)
