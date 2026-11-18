@@ -37,7 +37,7 @@ async function init() {
       phone text not null,
       date date not null,
       time time not null,
-      guests int not null check (guests between 1 and 12),
+      guests int not null check (guests between 1 and 8),
       notes text default '',
       status text default 'pending',
       created_at timestamptz default now()
